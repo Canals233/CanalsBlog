@@ -2684,3 +2684,10 @@ ul.breadcrumb li:last-child {
     padding: 10px 12px;
   }
 }
+body {
+  background: url("/images/start-night.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
