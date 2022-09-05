@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="官方文档里一些有用的操作 安装本体，安装安卓模拟器 改资源环境变量 flutter doctor里面的提示，照着做就行，VS不是必要的 flutter的优势是可以完全自定义每个项目，并且是完全编译成native机器语言 最重要的是一切内容都是组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter学习笔记p1">
+<meta property="og:url" content="http://example.com/2022/09/05/Flutter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0p1/index.html">
+<meta property="og:site_name" content="卡娜斯的博客">
+<meta property="og:description" content="官方文档里一些有用的操作 安装本体，安装安卓模拟器 改资源环境变量 flutter doctor里面的提示，照着做就行，VS不是必要的 flutter的优势是可以完全自定义每个项目，并且是完全编译成native机器语言 最重要的是一切内容都是组件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.postimg.cc/CMt5qnCn/Snipaste-2022-09-05-14-51-50.png">
+<meta property="article:published_time" content="2022-09-05T10:19:05.000Z">
+<meta property="article:modified_time" content="2022-09-05T10:24:03.366Z">
+<meta property="article:author" content="Canals">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/CMt5qnCn/Snipaste-2022-09-05-14-51-50.png">
+
+
+<link rel="canonical" href="http://example.com/2022/09/05/Flutter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0p1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/09/05/Flutter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0p1/","path":"2022/09/05/Flutter学习笔记p1/","title":"Flutter学习笔记p1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter学习笔记p1 | 卡娜斯的博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">卡娜斯的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">调制代码，改变人生</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vscode%E9%87%8C%E8%BF%90%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">vscode里运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world"><span class="nav-number">2.</span> <span class="nav-text">hello world</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.0.1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81"><span class="nav-number">2.0.2.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E"><span class="nav-number">2.0.3.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E6%95%B0%E7%BB%84"><span class="nav-number">2.0.4.</span> <span class="nav-text">渲染数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.0.5.</span> <span class="nav-text">样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getter"><span class="nav-number">2.0.6.</span> <span class="nav-text">getter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%92%AE%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.0.7.</span> <span class="nav-text">按钮样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container%E7%9A%84%E5%BD%A2%E7%8A%B6%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.0.8.</span> <span class="nav-text">Container的形状样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">2.0.9.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%EF%BC%9A%E8%AE%B0%E8%B4%A6%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.</span> <span class="nav-text">第一个应用：记账程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%8C%85"><span class="nav-number">2.1.2.</span> <span class="nav-text">引入包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5"><span class="nav-number">2.1.3.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8"><span class="nav-number">2.1.4.</span> <span class="nav-text">滚动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%92%AE"><span class="nav-number">2.1.5.</span> <span class="nav-text">按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95"><span class="nav-number">2.1.6.</span> <span class="nav-text">表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80"><span class="nav-number">2.1.7.</span> <span class="nav-text">全局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">2.1.8.</span> <span class="nav-text">上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaterialApp%E7%9A%84%E5%85%A8%E5%B1%80"><span class="nav-number">2.1.8.1.</span> <span class="nav-text">MaterialApp的全局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">2.1.8.2.</span> <span class="nav-text">字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87"><span class="nav-number">2.1.9.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%94%9F%E6%88%90"><span class="nav-number">2.1.10.</span> <span class="nav-text">列表生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E7%99%BE%E5%88%86%E6%AF%94"><span class="nav-number">2.1.11.</span> <span class="nav-text">模拟百分比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%AA%E6%8E%92%E5%8D%A1%E7%89%87"><span class="nav-number">2.1.12.</span> <span class="nav-text">横排卡片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.13.</span> <span class="nav-text">日期选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#future%EF%BC%81"><span class="nav-number">2.1.14.</span> <span class="nav-text">future！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%A1%86"><span class="nav-number">2.1.15.</span> <span class="nav-text">弹框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E9%85%8D"><span class="nav-number">2.2.</span> <span class="nav-text">适配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.2.1.</span> <span class="nav-text">媒体查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%BF%BB%E8%BD%AC"><span class="nav-number">2.2.2.</span> <span class="nav-text">锁翻转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%85%B3"><span class="nav-number">2.2.3.</span> <span class="nav-text">开关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%88%B0ios"><span class="nav-number">2.2.4.</span> <span class="nav-text">跨平台到ios</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">2.3.</span> <span class="nav-text">运行时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E6%9B%B4%E6%96%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">树更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">2.3.2.</span> <span class="nav-text">const</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#const%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">const构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#return%E6%97%B6const"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">return时const</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.3.3.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">运行状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-number">2.3.4.</span> <span class="nav-text">key</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Canals</p>
+  <div class="site-description" itemprop="description">四川大学计科2021级码农卡娜斯，主要方向是前端React，欢迎交流</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Canals233" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Canals233" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://leetcode.cn/u/canals/" title="LeetCode → https:&#x2F;&#x2F;leetcode.cn&#x2F;u&#x2F;canals&#x2F;" rel="noopener" target="_blank"><i class="fa fa-code fa-fw"></i>LeetCode</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/about/" title="邮箱 → &#x2F;about&#x2F;"><i class="fa fa-envelope fa-fw"></i>邮箱</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://profileofcanals.netlify.app/" title="作品展示 → https:&#x2F;&#x2F;profileofcanals.netlify.app&#x2F;" rel="noopener" target="_blank"><i class="fa fa-folder fa-fw"></i>作品展示</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/05/Flutter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0p1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Canals">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="卡娜斯的博客">
+      <meta itemprop="description" content="四川大学计科2021级码农卡娜斯，主要方向是前端React，欢迎交流">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter学习笔记p1 | 卡娜斯的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter学习笔记p1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-09-05 18:19:05 / 修改时间：18:24:03" itemprop="dateCreated datePublished" datetime="2022-09-05T18:19:05+08:00">2022-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/flutter/" itemprop="url" rel="index"><span itemprop="name">flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>官方文档里一些有用的操作</p>
+<p>安装本体，安装安卓模拟器</p>
+<p>改资源环境变量</p>
+<p>flutter doctor里面的提示，照着做就行，VS不是必要的</p>
+<p>flutter的优势是可以完全自定义每个项目，并且是完全编译成native机器语言</p>
+<p><strong>最重要的是一切内容都是组件</strong></p>
+<span id="more"></span>
+
+<hr>
+<h1 id="vscode里运行"><a href="#vscode里运行" class="headerlink" title="vscode里运行"></a>vscode里运行</h1><p>只有flutter插件是必要的，会顺便安装dart插件</p>
+<p>flutter run第一次运行会非常地慢，我这里用了2643s，小半小时才安装好</p>
+<p>正常运行时候按r热重载</p>
+<p>也可以用vsc菜单栏的运行里面的非调试模式运行，有设置的话每次更新都会自动热重载</p>
+<p><strong>在vscode设置中 –&gt; Dart&amp;Flutter扩展 –&gt; Dart:Flutter Hot Reload On Save设置, 将默认选项manual修改为always</strong>进行自动重载，在非调试模式下运行才可以</p>
+<hr>
+<p>lib里放编写代码</p>
+<p>build里是flutter做的事情</p>
+<p>其他的文件夹看名字就可以知道是对应几个平台的输出文件</p>
+<h1 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h1><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main()&#123;</span><br><span class="line">  runApp(Myapp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myapp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span></span>&#123;</span><br><span class="line">    <span class="comment">//该应用程序继承了 StatelessWidget，这将会使应用本身也成为一个 widget。一个 widget 的主要工作是提供一个 build() 方法来描述如何根据其他较低级别的 widgets 来显示自己。</span></span><br><span class="line">    </span><br><span class="line">  <span class="meta">@override</span><span class="comment">//装饰器，指明自建的build方法覆盖了有/无状态组件的build方法</span></span><br><span class="line">  Widget build(BuildContext context) &#123;<span class="comment">//构造函数，返回一个组件</span></span><br><span class="line">      <span class="keyword">return</span> MaterialApp(<span class="comment">//用内置materialApp创建一个组件，这是一个类函数，是传递了参数到去constructer</span></span><br><span class="line">      home: Scaffold(</span><br><span class="line">          appBar: AppBar(title: Text(<span class="string">&#x27;My First App&#x27;</span>)),</span><br><span class="line">          body: Column(</span><br><span class="line">            <span class="comment">//Column等是结构组件，里面可以通过children属性渲染一个组件数组&lt;Widget&gt;会自动推断可以不加</span></span><br><span class="line">            <span class="comment">//有变化的内容，即不是完全确定的内容，最大父组件不能用const声明，否则报错</span></span><br><span class="line">            children:  &lt;Widget&gt;[</span><br><span class="line">              Text(<span class="string">&#x27;question!&#x27;</span>),</span><br><span class="line">              ElevatedButton(</span><br><span class="line">                child: Text(<span class="string">&#x27;Answer1&#x27;</span>),</span><br><span class="line">                onPressed: ()=&gt;answerQuestion(),<span class="comment">//创建新函数直接返回</span></span><br><span class="line">              ),</span><br><span class="line">              ElevatedButton(</span><br><span class="line">                child: Text(<span class="string">&#x27;Answer2&#x27;</span>),</span><br><span class="line">                onPressed: answerQuestion,<span class="comment">//指向地址</span></span><br><span class="line">              ),</span><br><span class="line">              ElevatedButton(</span><br><span class="line">                child: Text(<span class="string">&#x27;Answer3&#x27;</span>),</span><br><span class="line">                onPressed: ()&#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;,</span><br><span class="line">              )</span><br><span class="line">            ],</span><br><span class="line">          )),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>dart对construct最简单写法</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person(&#123;<span class="keyword">this</span>.son,<span class="keyword">this</span>.age&#125;)</span><br><span class="line">&#123;<span class="comment">//可以不用括号</span></span><br><span class="line">    <span class="comment">//想执行的函数，打印之类</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复合构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在 <span class="class"><span class="keyword">class</span> <span class="title">Person</span>里面</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	Person.somename(<span class="keyword">this</span>.name)&#123;</span><br><span class="line">	age=<span class="number">60</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.somename(<span class="string">&#x27;ovo&#x27;</span>)</span><br><span class="line">就会创造一给参数是名字，age为<span class="number">60</span>的对象</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>每个组件都需要从有状态组件或者无状态组件扩展，并且都要有一个build方法</p>
+<p>多个数据要加上花括号才能</p>
+<p><strong>bulid方法类似render（），每次重加载，都会被调用一次，变量会被重置为声明状态</strong></p>
+<p>不想改变的变量放在build之外</p>
+<p>很多小组件是无状态组件，在创建时就被确定，不能更新，只能重建，如果在里面用了与UI有关的变量，可能会导致<strong>变量状态丢失</strong></p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myapp</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;<span class="comment">//代表着可以在这个组件里使用状态</span></span><br><span class="line">    </span><br><span class="line">  <span class="meta">@override</span><span class="comment">//重写状态组件的方法</span></span><br><span class="line">  State&lt;StatefulWidget&gt; createState() &#123;</span><br><span class="line">    <span class="keyword">return</span> MyAppState();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyAppState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">Myapp</span>&gt;//状态绑定 </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _questionIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> answerQuestion() &#123;</span><br><span class="line">    setState(() &#123;<span class="comment">//setState代表控制重渲染，只渲染其对应class的build</span></span><br><span class="line">      _ques        tionIndex += <span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>_MyAppState</code>的下划线特殊语法代表文件私类，import后不能被其他文件调用</p>
+<p><code>_questionIndex</code>代表私有属性，不能被其他类调用</p>
+<p>由于通过setState类似强制的更新，其直接在变量本身操作即可，即不用像react对数组赋予新数组</p>
+<p>有状态组件的构造函数要在本体，即上面一个class</p>
+<p>通过**widget.**可以从state访问到本体</p>
+<hr>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p><code>final</code>关键字表示其在构造初始化后不会再改变 ，是运行时候的不变量，大概可以看作初始空值，但是可以在运行时再赋值一次</p>
+<p>const是编译常量，使用 const 修饰的常量的值，必须由可在编译时可计算出结果的</p>
+<p>如果是</p>
+<p><code>var a=const []</code>则代表后面数组之类的值不能被修改，用add那些方法会导致报错</p>
+<p>var 的变量如果有非null初值，不能再为null</p>
+<p>声明值后面加？，则其为 声明 || null形式</p>
+<p><code>VoidCallback</code>代表没有参数和返回值，通常用于无参的点击事件向按钮传递</p>
+<p>dart中if的判断条件只能有布尔值</p>
+<p>dart中构造函数声明自定义类不用new</p>
+<p>字符串声明引用**$**特殊符号，类似js尖引号的，在字符串内使用，其后面花括号里上变量名</p>
+<p><code>&#39;$val&#39;</code>相当于自动调用了.toString()，这也是基础字符串相加的改写</p>
+<p>构造函数传参时，如果属性的声明没有加？会报错，通常是再声明对象中，每一个变量加上require</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Quiz(</span><br><span class="line">      &#123;<span class="keyword">required</span> <span class="keyword">this</span>.questions,</span><br><span class="line">      <span class="keyword">required</span> <span class="keyword">this</span>.answerQuestion,</span><br><span class="line">      <span class="keyword">required</span> <span class="keyword">this</span>.questionIndex&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此时，构造函数需要键值声明</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Quiz(</span><br><span class="line">                  answerQuestion: answerQuestion,</span><br><span class="line">                  questionIndex: _questionIndex,</span><br><span class="line">                  questions: questions,</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> questions = [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&#x27;questionText&#x27;</span>: <span class="string">&#x27;hello there&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;answer&#x27;</span>: [<span class="string">&#x27;fine!&#x27;</span>, <span class="string">&#x27;well&#x27;</span>, <span class="string">&#x27;lol&#x27;</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    ];</span><br></pre></td></tr></table></figure>
+
+<p>括号内实际上是多个map，是Map内置对象的简单写法</p>
+<p>如果调用时候出现类型检查要求为string</p>
+<p>加上as String即可</p>
+<p>double.parse(value) 转成double形式</p>
+<h3 id="渲染数组"><a href="#渲染数组" class="headerlink" title="渲染数组"></a>渲染数组</h3><p>这段在父组件的children数组里</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Question(questions[_questionIndex][<span class="string">&#x27;questionText&#x27;</span>] <span class="keyword">as</span> <span class="built_in">String</span>),</span><br><span class="line">             ...(questions[_questionIndex][<span class="string">&#x27;answer&#x27;</span>] <span class="keyword">as</span> <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;)</span><br><span class="line">                 .map((answer) &#123;</span><br><span class="line">               <span class="keyword">return</span> Answer(answerQuestion, answer);</span><br><span class="line">             &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>map里直接传入一个（）{}函数</p>
+<p>有类型报错的话，用<strong>as 声明即可</strong></p>
+<p>children数组不能嵌套，要把它展开</p>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><p>不同组件实现样式的方式不同</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> Container(</span><br><span class="line">     width: <span class="built_in">double</span>.infinity,</span><br><span class="line">     margin: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">     child: Text(</span><br><span class="line">       questionText,</span><br><span class="line">       style: TextStyle(fontSize: <span class="number">28</span>),</span><br><span class="line">       textAlign: TextAlign.center,</span><br><span class="line">     ),</span><br><span class="line">   );</span><br></pre></td></tr></table></figure>
+
+<h3 id="getter"><a href="#getter" class="headerlink" title="getter"></a>getter</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String get res&#123;</span><br><span class="line">return someting</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按钮样式"><a href="#按钮样式" class="headerlink" title="按钮样式"></a>按钮样式</h3><p>由于button组件的更新</p>
+<p>Elevated&#x2F;Text&#x2F;Outlined</p>
+<p>只需要ElevatedButton.styleFrom换成对应的TextButton即可</p>
+<p>ElevatedButton的primary是背景，primary可以认为是中点</p>
+<p>TextButton和Outlined的是显示的字</p>
+<p>Outlined是轮廓，style是 BorderStyle，Outlined。styleFrom也是用side属性</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ElevatedButton(</span><br><span class="line">          child: Text(answerText),</span><br><span class="line">          onPressed: selectHandler,</span><br><span class="line">          style: ButtonStyle(</span><br><span class="line">            backgroundColor: MaterialStateProperty.all(Colors.yellow),<span class="comment">//背景</span></span><br><span class="line">            foregroundColor: MaterialStateProperty.all(Colors.blue),<span class="comment">//字体</span></span><br><span class="line">              <span class="comment">//通常IDE，有提示</span></span><br><span class="line">          ),</span><br><span class="line">        )</span><br><span class="line">    </span><br><span class="line">    或者 style: ElevatedButton.styleFrom(</span><br><span class="line">          primary: Colors.green,<span class="comment">//背景</span></span><br><span class="line">          onPrimary: Colors.yellow,<span class="comment">//文字</span></span><br><span class="line">        ),</span><br></pre></td></tr></table></figure>
+
+<h3 id="Container的形状样式"><a href="#Container的形状样式" class="headerlink" title="Container的形状样式"></a>Container的形状样式</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">                  </span><br><span class="line">                      margin:</span><br><span class="line">                          EdgeInsets.symmetric(vertical: <span class="number">10</span>, horizontal: <span class="number">15</span>),</span><br><span class="line">    <span class="comment">//EdgeInsets是margin和border的格式</span></span><br><span class="line">                      decoration: BoxDecoration(</span><br><span class="line">                          border: Border.all(</span><br><span class="line">                              color: Colors.black,</span><br><span class="line">                              width: <span class="number">2</span>,</span><br><span class="line">                              style: BorderStyle.solid)),</span><br><span class="line">                      padding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">                    ),</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>debug模式运行就是断点调试，会注入一些东西导致更卡</p>
+<p>vscode可以在全局命令中找到dart devtools，会自动连接正在进行的程序 </p>
+<h2 id="第一个应用：记账程序"><a href="#第一个应用：记账程序" class="headerlink" title="第一个应用：记账程序"></a>第一个应用：记账程序</h2><h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>一些组件只提供了属性方法，相当于包装了一些东西用于方便的使用</p>
+<p>Container是比较常用的可以控制大小的组件，类似div</p>
+<p>不同组件的有不同的设计思想，如Column和Card都是只提供必要的空间</p>
+<p><code>double.infinite</code>是无限大</p>
+<hr>
+<p>MaterialApp &#x2F; CupertinoApp  通常是根节点，提供了整个UI控制</p>
+<p>Scaffold &#x2F; CupertinoPageScaffold 通常是页面布局，一个页面只用一个，</p>
+<p>Container 最灵活的组件，相当于div，可以设置边框间距之类</p>
+<p>Padding组件直接就是给你一个padding属性去调整大小</p>
+<p>Row &#x2F; Column 布局组件，横排竖排的显示</p>
+<hr>
+<p>   Flexible &#x2F; Expanded 辅助row和column布局</p>
+<p>​	Flexible属性 </p>
+<p>fit: FlexFit.tight是占满剩余空间，loose是满足自身大小，Expanded默认tight，只有flex可以控制</p>
+<p>flex值与上面分开，有flex的优先满足flex，同时有loose可能出现空白</p>
+<hr>
+<p>Stack和Card 小布局，构成页面的各个块</p>
+<p>ListView &#x2F; GridView用列表和Grid设计的布局 ListTile是横排显示</p>
+<p>TextField 就是input     RaisedButton &#x2F; FlatButton &#x2F;IconButton 常用的几个按钮组</p>
+<p> GestureDetector &#x2F; InkWell 触摸屏</p>
+<p>SizedBox 更像div的东西</p>
+<p>FittedBox 控制宽度不变，如果是字体可能会缩小字号</p>
+<hr>
+<p>main axis是主轴，cross axis是副轴。副轴上有无限拉伸属性stretch</p>
+<p>下面以|为屏幕边，1为间距，ele为元素模拟</p>
+<p>spaceBetween是以两端元素为边，其余元素两边间隔均等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|ele 1 1 ele|</span><br></pre></td></tr></table></figure>
+
+<p>around是以屏幕页面两端为边，所有元素两边空白均等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|1 ele 1 1 ele 1|</span><br></pre></td></tr></table></figure>
+
+<p>evenly是所有元素间总和间隔均等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|1 ele 1 ele 1|</span><br></pre></td></tr></table></figure>
+
+<p>Row() with Flexible(fit: FlexFit.loose) ，会满足元素大小</p>
+<p>Row() with Flexible(fit: FlexFit.tight or Expanded()) ，元素会拉伸到充满容器，此时如果元素如果有flex：n，则会比例分成</p>
+<p>ListView将不会渲染其视窗外的内容，</p>
+<hr>
+<p>如果不想渲染，正常使用不扩展的class即可</p>
+<p><code>DateTime</code>是内置的时间类  DateTime.now()返回一个 DateTime对象</p>
+<p><code>.toStringAsFixed(2)</code>保留固定两位，会有舍入</p>
+<p>通过状态组件，最大的app组件可以保持无状态组件形式</p>
+<h3 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h3><p><a target="_blank" rel="noopener" href="https://pub.dev/%E5%8E%BB%E6%89%BE%E5%8C%85%EF%BC%8C">https://pub.dev/去找包，</a></p>
+<p>以intl为例，照着网站指引的就行，注意缩进</p>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>除了用onPressed去手动控制监听，还可以用组件属性controller：TextEditingController()，属性去自动监听</p>
+<p>其会将输入的内容绑定到TextEditingController()实例对象的text属性上</p>
+<h3 id="滚动"><a href="#滚动" class="headerlink" title="滚动"></a>滚动</h3><p>SingleChildScrollView组件基本上是通过确定高度实现，其需要父组件有高度的时候擦能正常运行，即只在高度范围内滚动</p>
+<p>ListView()是column的快捷滚动封装，但其有无限高度，其需要父组件指定高度</p>
+<p>ListView.bulid()是封装后的懒加载组件，没有children属性</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ListView.builder(</span><br><span class="line">        itemBuilder:(ctx,index)&#123;&#125;,<span class="comment">//ctx是上下文，index是其渲染的组件个数</span></span><br><span class="line">    itemCount:  _userTransaction.length,<span class="comment">//渲染总数</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<h3 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h3><p>Scaffold的appbar属性中有Actions属性，接收一个按钮数组，在导航栏上添加按钮</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">actions: [</span><br><span class="line">          IconButton(</span><br><span class="line">            onPressed: () &#123;&#125;,</span><br><span class="line">            icon: Icon(Icons.add),<span class="comment">//图标按钮有icon属性，接收一个Icon的返回值，Icons是material自带的</span></span><br><span class="line">          )</span><br><span class="line">        ],</span><br></pre></td></tr></table></figure>
+
+<p>Scaffold还有floatingActionButton属性，接收FloatingActionButton，也是一个图标按钮，</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">floatingActionButton: FloatingActionButton(</span><br><span class="line">        child: Icon(Icons.add),</span><br><span class="line">        onPressed: () =&gt; startAddNewTX(context),</span><br><span class="line">      ),<span class="comment">//</span></span><br><span class="line"></span><br><span class="line">floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,<span class="comment">//位置</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><p>下面这个方法会直接从底部弹出一个表单，context是要求的上下文BuildContext类，builder是实际返回的值，会直接在框里渲染</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">showModalBottomSheet(</span><br><span class="line"></span><br><span class="line">   context: ctx,</span><br><span class="line"></span><br><span class="line">   builder: (_) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> 某个组件</span><br><span class="line">    <span class="comment">//通过手势检测器来防止默认动作把他关掉</span></span><br><span class="line">	<span class="keyword">return</span> GestureDetector(</span><br><span class="line">            child: NewTransaction(_addNweTransaction),</span><br><span class="line">            onTap: ()&#123;&#125;,<span class="comment">//在点击时候神秘都不做</span></span><br><span class="line">            behavior: HitTestBehavior.opaque,<span class="comment">//不穿透点击</span></span><br><span class="line">          );</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h3><h3 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h3><p>上下文是BuildContext类，其用途广泛，可以作为跳入的参数，是元数据，给flutte提供直接沟通的渠道</p>
+<p><code>Navigator.of(context).pop();</code>从页面栈中弹出页面到屏幕上</p>
+<h4 id="MaterialApp的全局"><a href="#MaterialApp的全局" class="headerlink" title="MaterialApp的全局"></a>MaterialApp的全局</h4><p>MaterialApp的theme属性相当于全局样式，未覆盖情况下会默认使用它的值</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,<span class="comment">//默认调色板</span></span><br><span class="line">        accentColor: Colors.amber<span class="comment">//强调色，会用在浮动按钮之类的东西</span></span><br><span class="line">    fontFamily: <span class="string">&#x27;Quicksand&#x27;</span><span class="comment">//字体设置</span></span><br><span class="line">      ),</span><br></pre></td></tr></table></figure>
+
+<p>会将其绑定到Theme上，Theme存在于上下文中</p>
+<p>在某个地方使用由上下文中的主题带来的颜色,App存在的文件子树中不需要引入，在文件外的树需要从上下文获取</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color: Theme.of(context).primaryColor,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color: Color.fromARGB(<span class="number">220</span>, <span class="number">220</span>, <span class="number">220</span>, <span class="number">1</span>),</span><br></pre></td></tr></table></figure>
+
+<p>上面是通过RGBA获取颜色</p>
+<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p>把字体放在根目录下</p>
+<p>family用于标记，asset是文件地址，从根目录寻址</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fonts:</span><br><span class="line">    - family: OpenSans</span><br><span class="line">      fonts:</span><br><span class="line">        - asset: assets/fonts/OpenSans-Regular.ttf</span><br><span class="line">        - asset: assets/fonts/OpenSans-Bold.ttf</span><br><span class="line">          weight: <span class="number">700</span></span><br><span class="line">    - family: Quicksand</span><br><span class="line">      fonts:</span><br><span class="line">        - asset: assets/fonts/Quicksand-Regular.ttf</span><br><span class="line">        - asset: assets/fonts/Quicksand-Bold.ttf</span><br><span class="line">          weight: <span class="number">700</span></span><br></pre></td></tr></table></figure>
+
+<p>字体重载,以标题栏为例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">appBarTheme: AppBarTheme(</span><br><span class="line">            textTheme: ThemeData.light()<span class="comment">//这里是ThemeData的字体取light，其实就是默认</span></span><br><span class="line">这里是拷贝原有的样式覆盖              .textTheme.copyWith(headline6:TextStyle(fontFamily: <span class="string">&#x27;OpenSans&#x27;</span>))),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">主文件ThemeData中定义了</span><br><span class="line">    textTheme: ThemeData.light().textTheme.copyWith(</span><br><span class="line">              headline6: TextStyle(</span><br><span class="line">                fontFamily: <span class="string">&#x27;OpenSans&#x27;</span>,</span><br><span class="line">                fontWeight: FontWeight.bold,</span><br><span class="line">                fontSize: <span class="number">18</span>,</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在其他文件使用</span><br><span class="line">				Text(</span><br><span class="line">                      _userTransaction[index].title,</span><br><span class="line">                      style: Theme.of(context).textTheme.headline6,</span><br><span class="line">                    ),    </span><br></pre></td></tr></table></figure>
+
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>现在pubspec里加上</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">assets:</span><br><span class="line">   - assets/images/waiting.png</span><br><span class="line"></span><br><span class="line">这样就可以通过调用Image.asset</span><br><span class="line">       Container(</span><br><span class="line">                 child: Image.asset(</span><br><span class="line">                   <span class="string">&#x27;assets/images/waiting.png&#x27;</span>,</span><br><span class="line">                   fit: BoxFit.cover,</span><br><span class="line">                 ),</span><br><span class="line">                 height: <span class="number">200</span>,<span class="comment">//需要高度，不然无法变形</span></span><br><span class="line">               ),</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表生成"><a href="#列表生成" class="headerlink" title="列表生成"></a>列表生成</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">List</span>&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt;&gt; <span class="keyword">get</span> groupedValues &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">List</span>.generate(<span class="number">7</span>, (index) &#123;</span><br><span class="line">      <span class="keyword">final</span> weekDay = <span class="built_in">DateTime</span>.now().subtract(<span class="built_in">Duration</span>(days: index));</span><br><span class="line">        <span class="comment">//这是指现在时间起减去以天为单位的时间长度</span></span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="string">&#x27;day&#x27;</span>:DateFormat.E().format(weekDay)<span class="comment">//返回天数</span></span><br><span class="line">          ,<span class="string">&#x27;amount&#x27;</span>:<span class="number">9.99</span>&#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>date是一个时间戳，但是上面有day,month等属性直接可以用</strong></p>
+<p>where 替代了filter</p>
+<p>removeWhere则是true为删除</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_userTransaction.where((tx) &#123;</span><br><span class="line">     <span class="keyword">return</span> tx.date.isAfter(<span class="built_in">DateTime</span>.now().subtract(</span><br><span class="line">       <span class="built_in">Duration</span>(days: <span class="number">7</span>),</span><br><span class="line">     ));</span><br><span class="line">   &#125;).toList();</span><br></pre></td></tr></table></figure>
+
+<h3 id="模拟百分比"><a href="#模拟百分比" class="headerlink" title="模拟百分比"></a>模拟百分比</h3><p>Stack是图层重叠组件，越上面的图层优先级越低</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Stack(</span><br><span class="line">            children: [</span><br><span class="line">              Container(</span><br><span class="line">                </span><br><span class="line">              ),</span><br><span class="line">              FractionallySizedBox(</span><br><span class="line">                heightFactor: percentage,<span class="comment">//取0-1值，高度为父组件高度的百分比</span></span><br><span class="line">                child: Container(<span class="comment">//接收子组件</span></span><br><span class="line">                  decoration:</span><br><span class="line">                      BoxDecoration(color: Theme.of(context).primaryColor),</span><br><span class="line">                ),</span><br><span class="line">              )</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupedValues.fold(<span class="number">0.0</span>, (sum, item) &#123;</span><br><span class="line">      <span class="keyword">return</span> sum + (item[<span class="string">&#x27;amount&#x27;</span>] <span class="keyword">as</span> <span class="built_in">double</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="横排卡片"><a href="#横排卡片" class="headerlink" title="横排卡片"></a>横排卡片</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ListTile(</span><br><span class="line">                  leading: <span class="comment">//开头的东西，不一定要是圆形框</span></span><br><span class="line">    				CircleAvatar(</span><br><span class="line">                    radius: <span class="number">30</span>,<span class="comment">//半径</span></span><br><span class="line">                    child:<span class="comment">//一个组件</span></span><br><span class="line">                  ),</span><br><span class="line">                  title: <span class="comment">//主要内容的上部</span></span><br><span class="line">                  subtitle: <span class="comment">//主要内容的下部</span></span><br><span class="line">    			trailing:<span class="comment">//末位内容</span></span><br><span class="line">                );</span><br></pre></td></tr></table></figure>
+
+<h3 id="日期选择"><a href="#日期选择" class="headerlink" title="日期选择"></a>日期选择</h3><p>内置了一个唤出日期选择器的功能，这个返回一个future属性的值，没选返回null</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">showDatePicker(</span><br><span class="line">      context: context,</span><br><span class="line">      initialDate: nowTime,</span><br><span class="line">      firstDate: <span class="built_in">DateTime</span>(nowTime.year<span class="number">-1</span>),</span><br><span class="line">      lastDate: nowTime,</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<h3 id="future！"><a href="#future！" class="headerlink" title="future！"></a>future！</h3><p>和promise很像，都有then，catch之类的东西，也有异步的东西</p>
+<h3 id="弹框"><a href="#弹框" class="headerlink" title="弹框"></a>弹框</h3><p>首先通过showDialog唤出</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">showDialog(</span><br><span class="line">        context: context,</span><br><span class="line">        builder: (build) &#123;<span class="comment">//这里必要一个build</span></span><br><span class="line">          <span class="keyword">return</span> AlertDialog(<span class="comment">//build里面传内容d</span></span><br><span class="line">            content: Text(<span class="string">&#x27;确定删除吗&#x27;</span>),</span><br><span class="line">            actions: [</span><br><span class="line">              TextButton(</span><br><span class="line">                  onPressed: () &#123;</span><br><span class="line">                    Navigator.of(context).pop(<span class="keyword">false</span>);<span class="comment">//调出了一个新页面，所以弹出</span></span><br><span class="line">                  &#125;,</span><br><span class="line">                  child: Text(<span class="string">&#x27;取消&#x27;</span>)),</span><br><span class="line">              TextButton(</span><br><span class="line">                  onPressed: () &#123;</span><br><span class="line">                    setState(() &#123;</span><br><span class="line">                      _userTransaction</span><br><span class="line">                          .removeWhere((element) =&gt; element.id == id);</span><br><span class="line">                    &#125;);</span><br><span class="line">                    Navigator.of(context).pop(<span class="keyword">true</span>);</span><br><span class="line">                  &#125;,</span><br><span class="line">                  child: Text(<span class="string">&#x27;确定&#x27;</span>))</span><br><span class="line">            ],</span><br><span class="line">          );</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h2><h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3><p><code>MediaQuery.of(context).size.height * 0.6</code>通过媒体查询获取设备上下文，size是整个的屏幕属性</p>
+<p><code>MediaQuery.of(context).orientation==Orientation.landscape</code>媒体查询获取屏幕当前翻转位置</p>
+<p><code>MediaQuery.of(context).viewInsets.bottom</code>获取系统弹框的高度，通常是软键盘</p>
+<p><code>MediaQuery.of(context).size.width &gt; 360</code>经典的媒体查询，宽度</p>
+<p>屏幕高度包括手机自带状态栏，appbar导航栏，应用主体内容</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(MediaQuery.of(context).size.height -</span><br><span class="line">                     appBar.preferredSize.height-MediaQuery.of(context).padding.top)</span><br></pre></td></tr></table></figure>
+
+<p>上面就是减去导航栏和状态栏之后的东西</p>
+<p>在子组件中使用相对父组件的高度，下面这个方法返回一个组件，</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LayoutBuilder(builder: (ctx, constraint) &#123;<span class="keyword">return</span> 子组件&#125;</span><br><span class="line">             子组件高度为constraint.maxHeight * <span class="number">0.6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="锁翻转"><a href="#锁翻转" class="headerlink" title="锁翻转"></a>锁翻转</h3><p>下面的列表里是</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SystemChrome.setPreferredOrientations([</span><br><span class="line">    DeviceOrientation.portraitUp,</span><br><span class="line">    DeviceOrientation.portraitDown,</span><br><span class="line">  ]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h3><p>通常设置为一个受控组件，value是受控值，和后面函数参数不一样</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Switch(value: showChart, onChanged: (val)&#123;</span><br><span class="line">                setState(() &#123;</span><br><span class="line">                  showChart=val;</span><br><span class="line">                &#125;);</span><br><span class="line">              &#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>if语句可以在return里使用，通常控制的是是否渲染一个组件，一次只能判断一个或一个表达式</p>
+<p> 和jsx一样，组件代码可以抽离到一个变量里去来减少return的代码量</p>
+<h3 id="跨平台到ios"><a href="#跨平台到ios" class="headerlink" title="跨平台到ios"></a>跨平台到ios</h3><p>一些组件直接有自动适配选项，如<code>Switch.adaptive</code></p>
+<p>dart.io库可以提供平台选择，如Platform.isIos</p>
+<p><strong>cupertino widget</strong>是flutter提供的ios原生类似的样式</p>
+<p>cupertino不能和material兼容使用，指组件嵌套的情况</p>
+<p>ios还需要留一些空间去防止误触，用个safearea就行</p>
+<h2 id="运行时"><a href="#运行时" class="headerlink" title="运行时"></a>运行时</h2><p>类似react，flutter使用在屏幕上一秒刷60次，第一次刷新时候确定屏幕各像素内容，之后内容没改变就会不更新</p>
+<h3 id="树更新"><a href="#树更新" class="headerlink" title="树更新"></a>树更新</h3><p>flutter有组件树，元素树，渲染树三个</p>
+<p>组件树就代码抽象来的，给flutter信息。setstate会直接重建组件树，调用build，防止旧地址的新属性无法被检测，翻转和调用键盘导致的<strong>媒体查询</strong>改变也会引发使用了媒体查询的组件重建。</p>
+<p>元素树再根据组件树创建实际对象，作为组件树的引用，将组件和渲染连接起来。状态组件中还会再元素树创建state对象。<strong>元素树在组件树更新时候指向新的引用组件，不删除，信息交由渲染树更新</strong></p>
+<p>state对象是连接在元素树上，状态组件树setstate更新state（不删除），之后再注入到重建的新组件</p>
+<p>渲染树就是最后在屏幕上显示的东西</p>
+<p>build会重建一棵树下的所有东西，所以拆分组件很有意义，子组件重建不会上升到父组件</p>
+<p><strong><a target="_blank" rel="noopener" href="https://flutter.cn/docs/resources/inside-flutter">https://flutter.cn/docs/resources/inside-flutter</a></strong>访问文档获取更多性能原理</p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><h4 id="const构造函数"><a href="#const构造函数" class="headerlink" title="const构造函数"></a>const构造函数</h4><p>在无状态组件中，所有需要构造的属性都是final时候，可以在构造函数前面加上const，这会导致其不会允许作为普通变量访问其上的属性（不 const 的，可以作为普通对象去访问属性）</p>
+<h4 id="return时const"><a href="#return时const" class="headerlink" title="return时const"></a>return时const</h4><p>通常用const Text，来避免不需要的重建</p>
+<p>如果是const一个组件，里面变化的参数会导致不能使用const，即必须是其子组件和内容都是不变时候才能使用</p>
+<hr>
+<p>重构可以选择抽离组件 </p>
+<p>创建一个变量和一个返回Widget的函数是相似的</p>
+<p>不同在于变量可以写在build内部，函数要写在外面，导致函数通常需要多个参数</p>
+<p>返回多个组件以数组形式返回，记得使用后展开</p>
+<p><code>MediaQueryData mediaQuery, AppBar appBar, Widget txListWiget</code></p>
+<hr>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><a target="_blank" rel="noopener" href="https://postimg.cc/kDQ7r4p7"><img src="https://i.postimg.cc/CMt5qnCn/Snipaste-2022-09-05-14-51-50.png" alt="Snipaste-2022-09-05-14-51-50.png"></a></p>
+<p> 在使用这些生命周期的时候，可能会遇到需要重写</p>
+<p>super是一个对象，即通常是extend后面的那个组件</p>
+<p>initState即初始化状态，这里可以是http请求，这里不能使用setstate，，直接设定即可</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement initState</span></span><br><span class="line">    <span class="keyword">super</span>.initState();<span class="comment">//State&lt;NewTransaction&gt;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>didUpdateWidget在状态更新时候使用，通常用于比较新旧组件,使用widget对象以访问最新的组件</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> didUpdateWidget(<span class="keyword">covariant</span> NewTransaction oldWidget) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement didUpdateWidget</span></span><br><span class="line">    <span class="keyword">super</span>.didUpdateWidget(oldWidget);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>dispose即是组件卸载时候使用</p>
+<hr>
+<h4 id="运行状态"><a href="#运行状态" class="headerlink" title="运行状态"></a>运行状态</h4><p>inactive，没被内存清除，但是不可见也不会相应，进入后台时，先有这个状态后pause</p>
+<p>paused，在后台</p>
+<p>resumed,从后台回到屏幕</p>
+<p>suspending，即将清除，在调试过程中通常不会出现，因为与调试的链接已被清除</p>
+<hr>
+<p>由于限制了只能有一个extends，则需要with去混入多个</p>
+<p><code>with WidgetsBindingObserver</code></p>
+<p>在init里<code>WidgetsBinding.instance.addObserver(this);</code>创建一个状态监听器</p>
+<p>dispose时清除<code>WidgetsBinding.instance.removeObserver(this);</code></p>
+<p>下面的方法可能不会在编译器里提示，但确实是有的</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> didChangeAppLifecycleState(AppLifecycleState state)&#123;</span><br><span class="line">	</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>大部分无状态组件并不需要key</p>
+<p>状态组件，尤其是那种列表item被抽离出来的。</p>
+<p>组件树发生了变化，但是flutter检查时候元素树被认为不变，</p>
+<p>即A指向a，B指向b，a被删除后，A指向变为了b，A原来的状态仍然保留到了b上而B被删除，导致渲染变化，没有对应变化</p>
+<hr>
+<p>使用<code>UniqueKey()</code>可以创建一个独特key，但是会导致使用它的组件在重构变化时也重构，因为UniqueKey严格保证它是独特的</p>
+<p>为防止无限重置，可以用ValueKey()，传入一个客制的不变key</p>
+<p>构造函数后面的<code>: super(key: key);</code>是一个super初始化列表，是指将key放到父组件上面去</p>
+<p>加上key后，组件和元素映射都有相应的KEY，key对不上就会被销毁</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/flutter/" rel="tag"># flutter</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/26/ElectronJS-Crash-Course%202022%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="ElectronJS Crash Course 2022学习笔记">
+                  <i class="fa fa-chevron-left"></i> ElectronJS Crash Course 2022学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Canals</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
